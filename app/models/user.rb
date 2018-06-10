@@ -43,6 +43,6 @@ class User < ApplicationRecord
   end
   
   def added_like?(micropost)
-    self.likes.include?(micropost)
+    self.likes.include?(Like.find_by(micropost_id: micropost.id))
   end
 end

@@ -1,5 +1,6 @@
 <ul class="media-list">
   <% microposts.each do |micropost| %>
+  <% like = current_user.likes.find_by(micropost_id: micropost.id) %>
     <li class="media">
       <div class="media-left">
         <img class="media-object img-rounded" src="<%= gravatar_url(micropost.user, options = { size: 50 }) %>" alt="">
@@ -14,8 +15,14 @@
         <div>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: {confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
+          <!--お気に入りボタン表示-->
+          <% if current_user.added_like?(micropost) %>
+            <%= hidden_field_tag :post_id, like.micropost_id %>
+            <p>like_id = <%= like.id %>, user_id = <%= like.user_id %>, micropost_id = <%= like.micropost_id %></p>
+            <%= link_to "not like", like, method: :delete, class: 'btn btn-primary btn-xs' %>
           <% else %>
-            <%= link_to "like", micropost, method: :likes, class: 'btn btn-danger btn-xs' %>
+            <%= link_to 'like', "/likes?micropost_id=#{micropost.id}", method: :post, class: 'btn btn-primary btn-xs' %> 
           <% end %>
         </div>
       </div>

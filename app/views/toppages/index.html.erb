@@ -7,6 +7,7 @@
         </div>
         <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
       <% end %>
+      <%= link_to 'show likes', likes_path, class: 'btn btn-lg btn-primary' %>
     </aside>
     <div class="col-xs-8">
       <%= render 'microposts/microposts', microposts: @microposts %>

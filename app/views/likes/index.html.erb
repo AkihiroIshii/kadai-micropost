@@ -1,2 +1,19 @@
-<h1>Likes#index</h1>
-<p>Find me in app/views/likes/index.html.erb</p>
+<ul class="media-list">
+  <% @likes.each do |like| %>
+  <% micropost = Micropost.find(id=like.micropost_id) %>
+    <li class="media">
+      <div class="media-left">
+        <img class="media-object img-rounded" src="<%= gravatar_url(micropost.user, options = { size: 50 }) %>" alt="">
+      </div>
+      <div class="media-body">
+        <div>
+          <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+        </div>
+        <div>
+          <p><%= micropost.content %></p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate @likes %>
+</ul>
