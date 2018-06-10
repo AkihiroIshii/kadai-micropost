@@ -14,7 +14,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    micropost = Micropost.find_by(params[:micropost_id])
+    like = Like.find(params[:id])
+    micropost = Micropost.find_by(id: like.micropost_id)
     current_user.remove_like(micropost)
     flash[:success] = 'お気に入りを解除しました。'
     redirect_to root_url

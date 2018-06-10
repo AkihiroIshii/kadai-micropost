@@ -18,8 +18,6 @@
           <% end %>
           <!--お気に入りボタン表示-->
           <% if current_user.added_like?(micropost) %>
-            <%= hidden_field_tag :post_id, like.micropost_id %>
-            <p>like_id = <%= like.id %>, user_id = <%= like.user_id %>, micropost_id = <%= like.micropost_id %></p>
             <%= link_to "not like", like, method: :delete, class: 'btn btn-primary btn-xs' %>
           <% else %>
             <%= link_to 'like', "/likes?micropost_id=#{micropost.id}", method: :post, class: 'btn btn-primary btn-xs' %> 
